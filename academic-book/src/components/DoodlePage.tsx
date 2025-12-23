@@ -20,7 +20,10 @@ const DoodlePage = forwardRef<HTMLDivElement, DoodlePageProps>((props, ref) => {
         className="page-content"
         style={{
           height: '100%',
-          padding: '60px 60px 60px 60px', // notebook margins
+          paddingTop: '40px',      // top notebook margin
+          paddingLeft: '60px',
+          paddingRight: '40px',
+          paddingBottom: '40px',
           boxSizing: 'border-box'
         }}
       >
@@ -29,7 +32,7 @@ const DoodlePage = forwardRef<HTMLDivElement, DoodlePageProps>((props, ref) => {
           alt="Doodle Art"
           style={{
             width: '100%',
-            height: '100%',
+            maxHeight: '85%',       // prevents vertical centering effect
             objectFit: 'contain',
             display: 'block'
           }}
