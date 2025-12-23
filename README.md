@@ -28,9 +28,9 @@ This application is explicitly configured to allow embedding in iframes (e.g., i
 ## 💻 Local Development
 
 1. Open the terminal and navigate to the project root.
-2. Enter the demo directory:
+2. Enter the academic-notebook directory:
    ```bash
-   cd demo
+   cd academic-notebook
    ```
 3. Install dependencies:
    ```bash
