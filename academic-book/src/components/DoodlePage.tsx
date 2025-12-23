@@ -12,7 +12,7 @@ const DoodlePage = forwardRef<HTMLDivElement, DoodlePageProps>((props, ref) => {
     return (
         <Page ref={ref} variant="plain" className={`doodle-page ${props.className || ''}`} {...props}>
             <div className="page-content" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', padding: '10px 90px 50px 0px' }}>
-                <img src=""/this.jpg"/"
+                <img src="/this.jpg"
                     alt="Doodle Art"
                     style={{
                         width: '100%',
