@@ -28,7 +28,7 @@ const DoodlePage = forwardRef<HTMLDivElement, DoodlePageProps>((props, ref) => {
         }}
       >
         <img
-          src="/this.jpg" // 
+          src="/doodle.jpg" // 
           alt="Doodle Art"
           style={{
             width: '100%',
