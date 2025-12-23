@@ -19,21 +19,21 @@ const DoodlePage = forwardRef<HTMLDivElement, DoodlePageProps>((props, ref) => {
       <div
         className="page-content"
         style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-start', // 
           height: '100%',
-          paddingTop: '40px',      // top notebook margin
-          paddingLeft: '60px',
-          paddingRight: '40px',
-          paddingBottom: '40px',
+          padding: '40px 60px 40px 40px',
           boxSizing: 'border-box'
         }}
       >
         <img
-          src="/this.jpg"
+          src="/this.jpg" // 
           alt="Doodle Art"
           style={{
             width: '100%',
-            maxHeight: '85%',       // prevents vertical centering effect
-            objectFit: 'contain',
+            maxHeight: '90%',
+            objectFit: 'contain', // 
             display: 'block'
           }}
         />
