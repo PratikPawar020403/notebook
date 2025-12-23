@@ -1,0 +1,31 @@
+/* src/styles/Global.css */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    /* User instruction: Do NOT lock scroll globally on html/body, only on container */
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* High-priority global fixes for Flipbook */
+
+.flipbook-wrapper,
+.stf__parent,
+.stf__wrapper {
+    overflow: hidden !important;
+    /* Helper to prevent leakage */
+}
+
+/* Ensure helper layers don't hijack background/hover */
+.stf__item,
+.stf__block {
+    /* Only apply background if absolutely necessary, but strictly relying on .page is better. 
+     However, to prevent black flash, we can set a fallback here. */
+    background-color: #fdf6e3 !important;
+}
