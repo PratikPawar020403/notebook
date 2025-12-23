@@ -14,7 +14,7 @@ A beautiful, interactive digital notebook built with React and page-flip animati
 
 This project is configured for **Netlify** deployment.
 
-- **Deployment Root**: `/demo` (The web application lives in this folder)
+- **Deployment Root**: `/academic-notebook` (The web application lives in this folder)
 - **Build Command**: `npm run build`
 - **Publish Directory**: `dist`
 - **Node Version**: 18+ recommended
