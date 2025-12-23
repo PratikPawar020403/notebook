@@ -14,7 +14,7 @@ A beautiful, interactive digital notebook built with React and page-flip animati
 
 This project is configured for **Netlify** deployment.
 
-- **Deployment Root**: `/academic-notebook` (The web application lives in this folder)
+- **Deployment Root**: `/academic-book` (The web application lives in this folder)
 - **Build Command**: `npm run build`
 - **Publish Directory**: `dist`
 - **Node Version**: 18+ recommended
@@ -28,9 +28,9 @@ This application is explicitly configured to allow embedding in iframes (e.g., i
 ## 💻 Local Development
 
 1. Open the terminal and navigate to the project root.
-2. Enter the academic-notebook directory:
+2. Enter the academic-book directory:
    ```bash
-   cd academic-notebook
+   cd academic-book
    ```
 3. Install dependencies:
    ```bash
