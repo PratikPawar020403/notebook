@@ -40,10 +40,6 @@ function App() {
             const scaleY = availableHeight / baseHeight;
 
             // Use the smaller scale to ensure it fits, cap at 1 to avoid pixelation upscaling
-            // But if user wants "auto-fits container width" even on large screens, we might check.
-            // "Notebook auto-fits container width" -> suggests filling. 
-            // Let's cap at 1.5 for desktop to avoid too small on 4k, but keeps crispness.
-            // Actually, safe bet is min(scale, 1) to start.
             let newScale = Math.min(scaleX, scaleY);
             if (newScale > 1) newScale = 1; // Cap at 1 for now
 
@@ -256,19 +252,35 @@ function App() {
                                 {mscContent.program}
                             </div>
                         </div>
+
                         <h2 className="text-heading" style={{ textDecoration: 'underline' }}>Marks</h2>
                         <div style={{ marginBottom: '30px', display: 'flex', flexDirection: 'column', gap: '0px' }}>
-                            <div className="text-marks-item">
-                                <span>Result</span>
-                                <span>Awaited...</span>
-                            </div>
+                            {(mscContent.marks && mscContent.marks.length > 0) ? (
+                                mscContent.marks.map((mark, idx) => (
+                                    <div key={idx} className="text-marks-item">
+                                        <span>{mark.subject}</span>
+                                        <span>{mark.score}</span>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="text-marks-item">
+                                    <span>Result</span>
+                                    <span>Awaited...</span>
+                                </div>
+                            )}
                         </div>
 
                         <h2 className="text-heading" style={{ textDecoration: 'underline' }}>Key Learnings</h2>
                         <ul className="text-list">
-                            <li className="text-list-item">
-                                loading...
-                            </li>
+                            {(mscContent.learnings && mscContent.learnings.length > 0) ? (
+                                mscContent.learnings.map((learning, idx) => (
+                                    <li key={idx} className="text-list-item">
+                                        {learning}
+                                    </li>
+                                ))
+                            ) : (
+                                <li className="text-list-item">loading...</li>
+                            )}
                         </ul>
                     </div>
                 );
