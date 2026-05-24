@@ -9,27 +9,27 @@ export const mscContent = {
     marks: [
         {
             subject: "CGPA",
-            grade: "7.58"
+            score: "7.58"
         },
         {
             subject: "Generative AI",
-            grade: "A"
+            score: "A"
         },
         {
             subject: "Machine Learning",
-            grade: "B+"
+            score: "B+"
         },
         {
             subject: "Blockchain Technology",
-            grade: "A+"
+            score: "A+"
         },
         {
             subject: "RPA",
-            grade: "B+"
+            score: "B+"
         },
         {
             subject: "Penetration Testing",
-            grade: "A+"
+            score: "A+"
         }
     ],
     learnings: [
@@ -39,5 +39,5 @@ export const mscContent = {
         "Growth does not always come with clarity."
     ],
     institute: "Ramnarain Ruia Autonomous College",
-    program: "MSc Information Technology"
+    program: "MSC.IT"
 };
