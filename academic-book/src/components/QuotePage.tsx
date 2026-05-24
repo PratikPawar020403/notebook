@@ -37,10 +37,10 @@ const QuotePage = forwardRef<HTMLDivElement, QuotePageProps>((props, ref) => {
 
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                         <div style={{ fontWeight: 'bold', fontSize: '1.4rem', marginBottom: '5px', color: '#333' }}>
-                            Osho
+                            Leonardo da Vinci
                         </div>
                         <div style={{ fontSize: '1.2rem', color: '#555', lineHeight: '1.4' }}>
-                            “I am here to confuse you more and more.”
+                            “Simplicity is the ultimate sophistication.”
                         </div>
                     </div>
                 </div>
