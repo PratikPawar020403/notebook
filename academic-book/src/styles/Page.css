@@ -2,14 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
 .page {
-  background-color: #fdf6e3;
-  /* Warm beige */
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+  background-color: #ffffff !important;
+  /* Crisp clean white notebook paper */
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: auto;
 
-  box-shadow: inset 20px 0 50px -10px rgba(0, 0, 0, 0.15);
-  /* Soft spine shadow */
+  box-shadow: inset 20px 0 50px -10px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  /* Soft spine shadow and page border */
   box-sizing: border-box;
   padding: 30px;
   /* General padding */
@@ -23,84 +23,81 @@
   /* Force surface ownership */
 
   --line-height: 30px;
-  --paper-bg: #fdf6e3;
+  --paper-bg: #ffffff;
   --text-color: #2c2c2c;
 
   pointer-events: auto !important;
   /* Prevent interaction fall-through */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-/* AGGRESSIVE FIX: Ensure hover NEVER changes background color/opacity */
+/* Ensure hover NEVER changes background color/opacity */
 .page:hover {
-  background-color: #fdf6e3 !important;
+  background-color: #ffffff !important;
   opacity: 1 !important;
 }
 
 /* Variant-specific hover fixes to persist correct backgrounds */
-.page--plain:hover {
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E") !important;
+.page--plain {
+  background-color: #ffffff !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") !important;
+  background-size: auto;
+  background-repeat: repeat;
 }
 
-.page--inner:hover {
+.page--plain:hover {
+  background-color: #ffffff !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") !important;
+}
+
+.page--inner {
+  padding-left: 50px;
+  /* Extra left padding to clear margin line */
+  background-color: #ffffff !important;
+  /* ruled lines + margin line combined in background */
   background-image:
     /* Margin Line (Red) */
     linear-gradient(to right,
       transparent 0,
       transparent 40px,
-      rgba(239, 68, 68, 0.4) 40px,
-      rgba(239, 68, 68, 0.4) 42px,
+      rgba(239, 68, 68, 0.45) 40px,
+      rgba(239, 68, 68, 0.45) 42px,
       transparent 42px),
     /* Ruled Lines (Horizontal) */
     repeating-linear-gradient(to bottom,
       transparent 0,
       transparent calc(var(--line-height) - 1px),
-      #94a3b8 calc(var(--line-height) - 1px),
-      #94a3b8 var(--line-height)) !important;
+      #cbd5e1 calc(var(--line-height) - 1px),
+      #cbd5e1 var(--line-height)) !important;
+
+  background-repeat: no-repeat, repeat-y !important;
+  background-size: 100% 100%, 100% 30px !important;
+  background-position: 0 0, 0 -4px !important;
+}
+
+.page--inner:hover {
+  background-color: #ffffff !important;
+  background-image:
+    /* Margin Line (Red) */
+    linear-gradient(to right,
+      transparent 0,
+      transparent 40px,
+      rgba(239, 68, 68, 0.45) 40px,
+      rgba(239, 68, 68, 0.45) 42px,
+      transparent 42px),
+    /* Ruled Lines (Horizontal) */
+    repeating-linear-gradient(to bottom,
+      transparent 0,
+      transparent calc(var(--line-height) - 1px),
+      #cbd5e1 calc(var(--line-height) - 1px),
+      #cbd5e1 var(--line-height)) !important;
   background-size: 100% 100%, 100% 30px !important;
   background-repeat: no-repeat, repeat-y !important;
 }
 
 .page * {
   pointer-events: auto !important;
-}
-
-
-
-
-/* --- Ruled Page Variant --- */
-/* --- Ruled Page Variant --- */
-.page--inner {
-  padding-left: 50px;
-  /* Extra left padding to clear margin line */
-
-  /* ruled lines + margin line combined in background */
-  background-color: var(--paper-bg);
-  background-image:
-    /* Margin Line (Red) */
-    linear-gradient(to right,
-      transparent 0,
-      transparent 40px,
-      rgba(239, 68, 68, 0.4) 40px,
-      rgba(239, 68, 68, 0.4) 42px,
-      transparent 42px),
-    /* Ruled Lines (Horizontal) */
-    repeating-linear-gradient(to bottom,
-      transparent 0,
-      transparent calc(var(--line-height) - 1px),
-      #94a3b8 calc(var(--line-height) - 1px),
-      #94a3b8 var(--line-height));
-
-  background-repeat: no-repeat, repeat-y;
-  background-size: 100% 100%, 100% 30px;
-  background-position: 0 0, 0 -4px;
-}
-
-/* --- Plain Page Variant --- */
-.page--plain {
-  /* No extra padding, no ruled lines */
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
-  background-size: auto;
-  background-repeat: repeat;
 }
 
 
@@ -251,8 +248,11 @@
 
 /* Cover Page Specific Styles */
 .cover-page {
+  background-color: #ffffff !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
   /* Override background to remove ruled lines but keep noise */
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E") !important;
   background-size: auto;
   background-repeat: repeat;
   background-position: 0 0;

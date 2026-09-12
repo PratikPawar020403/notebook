@@ -1,31 +1,362 @@
 /* src/styles/Global.css */
 
+:root {
+    --bg-primary: #eef1f5;
+    --bg-spotlight: #f8fafc;
+    --text-kicker: #64748b;
+    --text-title: #0f172a;
+    --text-subtitle: #475569;
+    --accent-glow: rgba(0, 0, 0, 0.04);
+}
+
 html,
 body {
     margin: 0;
     padding: 0;
-    /* User instruction: Do NOT lock scroll globally on html/body, only on container */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+    color: var(--text-title);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-/* High-priority global fixes for Flipbook */
+/* ==========================================================================
+   Section Framing & Layout (Fix 1, Fix 2, Fix 3, Fix 6)
+   ========================================================================== */
 
-.flipbook-wrapper,
-.stf__parent,
-.stf__wrapper {
+.notebook-section {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    box-sizing: border-box;
+    padding: 1.25rem 1.5rem 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    background-color: var(--bg-primary);
+    background-image: radial-gradient(
+        ellipse 80% 60% at 50% 35%,
+        #f8fafc 0%,
+        #e8ebf0 75%
+    );
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .notebook-section {
+        padding: 0.75rem 0.5rem 0.5rem 0.5rem;
+    }
+}
+
+.notebook-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+/* Section Header (Fix 1) */
+.notebook-header {
+    text-align: center;
+    margin-bottom: 1.15rem;
+    max-width: 680px;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.notebook-kicker {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-kicker);
+    margin-bottom: 0.25rem;
+}
+
+.notebook-title {
+    font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+    font-weight: 800;
+    color: var(--text-title);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0 0 0.35rem 0;
+}
+
+.notebook-subtitle {
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+    color: var(--text-subtitle);
+    line-height: 1.35;
+    margin: 0 auto;
+    max-width: 540px;
+}
+
+/* Stage Area (Flanking Buttons + Book) */
+.notebook-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    margin-bottom: 0.65rem;
+}
+
+/* Entrance Animation (Mount Animation / Fix 7) */
+.flipbook-entrance {
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.flipbook-entrance.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Soft drop shadow + grounding under book (Fix 2) */
+.flipbook-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Soft drop shadow beneath the flipbook container */
+    filter: drop-shadow(0 22px 35px rgba(15, 23, 42, 0.16)) drop-shadow(0 8px 14px rgba(15, 23, 42, 0.09));
+    transition: filter 0.3s ease;
+    overflow: visible;
+}
+
+/* Ambient ground shadow ellipse */
+.flipbook-ground-shadow {
+    position: absolute;
+    bottom: -22px;
+    left: 8%;
+    right: 8%;
+    height: 36px;
+    background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0) 70%);
+    filter: blur(12px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ==========================================================================
+   Interaction Affordances (Fix 4)
+   ========================================================================== */
+
+/* Flanking navigation buttons */
+.flipbook-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    min-height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 25;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+    touch-action: manipulation;
+}
+
+.flipbook-nav-btn:hover:not(:disabled) {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.22);
+    color: #000000;
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.06);
+}
+
+.flipbook-nav-btn:active:not(:disabled) {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.flipbook-nav-btn:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.flipbook-nav-prev {
+    left: -58px;
+}
+
+.flipbook-nav-next {
+    right: -58px;
+}
+
+@media (max-width: 900px) {
+    .flipbook-nav-prev {
+        left: -48px;
+    }
+    .flipbook-nav-next {
+        right: -48px;
+    }
+}
+
+@media (max-width: 640px) {
+    .flipbook-nav-btn {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+    .flipbook-nav-prev {
+        left: -38px;
+    }
+    .flipbook-nav-next {
+        right: -38px;
+    }
+}
+
+/* Page Indicator & Footer */
+.flipbook-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.flipbook-page-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.95rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--text-title);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.flipbook-page-indicator .current {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.flipbook-page-indicator .separator {
+    opacity: 0.4;
+    color: var(--text-kicker);
+}
+
+.flipbook-page-indicator .total {
+    color: var(--text-subtitle);
+}
+
+.flipbook-hint-text {
+    font-size: 0.75rem;
+    color: var(--text-subtitle);
+    opacity: 0.85;
+    letter-spacing: 0.02em;
+}
+
+
+
+/* ==========================================================================
+   Clean overrides for react-pageflip library classes (Fix 5 & Flip Flash Prevention)
+   ========================================================================== */
+
+.stf__parent {
+    position: relative !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    /* Prevent page geometry from leaking outside the book during flip */
     overflow: hidden !important;
-    /* Helper to prevent leakage */
 }
 
-/* Ensure helper layers don't hijack background/hover */
-.stf__item,
+.stf__wrapper {
+    position: relative !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    /* Prevent page geometry from leaking outside the book during flip */
+    overflow: hidden !important;
+}
+
 .stf__block {
-    /* Only apply background if absolutely necessary, but strictly relying on .page is better. 
-     However, to prevent black flash, we can set a fallback here. */
-    background-color: #fdf6e3 !important;
+    position: absolute !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    perspective: 2000px !important;
+    transform-style: preserve-3d !important;
+    cursor: grab;
+}
+
+.stf__block:active {
+    cursor: grabbing;
+}
+
+.stf__item {
+    border: none !important;
+    outline: none !important;
+    background-color: #ffffff !important;
+    transform-style: preserve-3d;
+}
+
+/* Eliminate the pitch-black 400x600 hard shadow that appears during the cover flip */
+.stf__hardShadow,
+.stf__hardInnerShadow {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Realistic soft page-fold and corner-curl shadows (matches screenshot dog-ear depth) */
+.stf__outerShadow,
+.stf__innerShadow {
+    pointer-events: none !important;
 }

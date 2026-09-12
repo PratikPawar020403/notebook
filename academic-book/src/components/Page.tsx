@@ -14,7 +14,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
     const variantClass = variant === 'inner' ? 'page--inner' : 'page--plain';
 
     return (
-        <div className={`page ${variantClass} ${className || ''}`} ref={ref} style={{ backgroundColor: '#fdf6e3', ...style }} {...rest}>
+        <div className={`page ${variantClass} ${className || ''}`} ref={ref} style={{ backgroundColor: '#ffffff', ...style }} {...rest}>
             <div className="page-content">
                 {props.children}
             </div>
