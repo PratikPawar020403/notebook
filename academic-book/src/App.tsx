@@ -18,6 +18,8 @@ import lastImage from './assets/last2.jpg';
 
 function App() {
     const book = useRef<any>(null);
+    const headerRef = useRef<HTMLElement>(null);
+    const footerRef = useRef<HTMLElement>(null);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
     const [scale, setScale] = useState(1);
     const [currentPage, setCurrentPage] = useState(0);
@@ -26,14 +28,7 @@ function App() {
 
     // Cross-origin height broadcaster for parent iframe (Fix B)
     const sendHeight = useCallback(() => {
-        const rootEl = document.getElementById('root');
-        const docEl = document.documentElement;
-        const body = document.body;
-        const height = Math.max(
-            docEl ? docEl.scrollHeight : 0,
-            body ? body.scrollHeight : 0,
-            rootEl ? rootEl.scrollHeight : 0
-        );
+        const height = window.innerHeight || document.documentElement.clientHeight || 0;
         if (height > 0 && typeof window !== 'undefined' && window.parent && window.parent !== window) {
             window.parent.postMessage({ type: 'notebook-height', height }, '*');
         }
@@ -51,15 +46,18 @@ function App() {
             const baseHeight = 600;
 
             // Safe margins (accounting for flanking arrows and section padding)
-            const horizontalMargin = mobile ? 24 : 140;
-            const availableWidth = Math.max(width - horizontalMargin, 260);
+            const horizontalMargin = mobile ? 88 : 150;
+            const availableWidth = Math.max(width - horizontalMargin, 240);
 
             // Calculate scale to fit width comfortably
             const scaleX = availableWidth / baseWidth;
 
-            // Safe vertical margins reserved for header, footer, padding, and stage gaps
-            const verticalMargin = mobile ? 140 : 165;
-            const availableHeight = Math.max(height - verticalMargin, 250);
+            // Measure actual header and footer DOM heights so everything fits in a single screen
+            const headerH = headerRef.current ? headerRef.current.offsetHeight : (mobile ? 56 : 64);
+            const footerH = footerRef.current ? footerRef.current.offsetHeight : (mobile ? 48 : 54);
+            const verticalBuffer = mobile ? 48 : 68; // Section padding, flex gaps, and book ground shadow
+            const verticalMargin = Math.max(headerH + footerH + verticalBuffer, mobile ? 155 : 185);
+            const availableHeight = Math.max(height - verticalMargin, 220);
 
             // Calculate scale to fit height comfortably in a single screen
             const scaleY = availableHeight / baseHeight;
@@ -69,8 +67,8 @@ function App() {
 
             // Cap at 1 to avoid pixelation upscaling
             if (newScale > 1) newScale = 1;
-            // Floor at 0.4 for very small screens
-            if (newScale < 0.4) newScale = 0.4;
+            // Floor at 0.35 for very small screens
+            if (newScale < 0.35) newScale = 0.35;
 
             setScale(newScale);
             sendHeight();
@@ -78,6 +76,7 @@ function App() {
 
         window.addEventListener('resize', handleResize);
         handleResize(); // Initial calculation
+        const rTimer = setTimeout(handleResize, 100);
 
         // Trigger entrance mount animation (Fix 7 / Mount animation)
         const entranceTimer = setTimeout(() => {
@@ -104,6 +103,7 @@ function App() {
         return () => {
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('load', sendHeight);
+            clearTimeout(rTimer);
             clearTimeout(entranceTimer);
             clearTimeout(hTimer1);
             clearTimeout(hTimer2);
@@ -419,7 +419,7 @@ function App() {
         <section className="notebook-section" aria-label="My Academic Journey">
             <div className="notebook-container">
                 {/* Section Header (Fix 1) */}
-                <header className="notebook-header">
+                <header ref={headerRef} className="notebook-header">
                     <h2 className="notebook-kicker">MY ACADEMIC JOURNEY</h2>
                     <p className="notebook-subtitle">
                         Flip through milestones, coursework, marks, and key learnings.
@@ -553,7 +553,7 @@ function App() {
                 </div>
 
                 {/* Page Indicator Footer (Fix 4) */}
-                <footer className="flipbook-footer">
+                <footer ref={footerRef} className="flipbook-footer">
                     <div className="flipbook-page-indicator" aria-live="polite">
                         <span className="current">{currentPage + 1}</span>
                         <span className="separator">/</span>
