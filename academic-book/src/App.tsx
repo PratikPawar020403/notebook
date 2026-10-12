@@ -58,9 +58,7 @@ function App() {
             const scaleX = availableWidth / baseWidth;
 
             // Safe vertical margins reserved for header, footer, padding, and stage gaps
-            // Desktop: Header (~85px) + Footer (~50px) + Padding (~36px) + Stage gaps (~35px) = ~206px
-            // Mobile: Header (~70px) + Footer (~40px) + Padding (~25px) + Stage gaps (~25px) = ~160px
-            const verticalMargin = mobile ? 160 : 205;
+            const verticalMargin = mobile ? 140 : 165;
             const availableHeight = Math.max(height - verticalMargin, 250);
 
             // Calculate scale to fit height comfortably in a single screen
@@ -422,10 +420,9 @@ function App() {
             <div className="notebook-container">
                 {/* Section Header (Fix 1) */}
                 <header className="notebook-header">
-                    <span className="notebook-kicker">MY ACADEMIC JOURNEY</span>
-                    <h2 className="notebook-title">Academic Records</h2>
+                    <h2 className="notebook-kicker">MY ACADEMIC JOURNEY</h2>
                     <p className="notebook-subtitle">
-                        Flip through milestones, coursework, marks, and key academic learnings.
+                        Flip through milestones, coursework, marks, and key learnings.
                     </p>
                 </header>
 
