@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import Page from './Page';
+import doodleImage from '../assets/this.jpg';
 
 interface DoodlePageProps {
     children?: React.ReactNode;
@@ -13,7 +14,7 @@ const DoodlePage = forwardRef<HTMLDivElement, DoodlePageProps>((props, ref) => {
         <Page ref={ref} variant="plain" className={`doodle-page ${props.className || ''}`} {...props}>
             <div className="page-content" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', padding: '10px 90px 50px 0px' }}>
                 <img
-                    src="this.jpg"
+                    src={doodleImage}
                     alt="Doodle Art"
                     style={{
                         width: '100%',
