@@ -416,7 +416,7 @@ function App() {
     };
 
     return (
-        <section className="notebook-section" aria-label="Academic Records">
+        <section className="notebook-section" aria-label="My Academic Journey">
             <div className="notebook-container">
                 {/* Section Header (Fix 1) */}
                 <header className="notebook-header">
