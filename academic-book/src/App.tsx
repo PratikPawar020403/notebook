@@ -14,7 +14,6 @@ import { class10Content } from './data/content/class10';
 import { class12Content } from './data/content/class12';
 import { undergraduateContent } from './data/content/undergraduate';
 import { mscContent } from './data/content/msc';
-import lastImage from './assets/last2.jpg';
 
 function App() {
     const book = useRef<any>(null);
@@ -521,7 +520,7 @@ function App() {
                                             overflow: 'hidden'
                                         }}>
                                             <img
-                                                src={lastImage}
+                                                src="/last2.jpg"
                                                 alt="End"
                                                 style={{
                                                     width: '100%',
