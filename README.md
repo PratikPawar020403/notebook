@@ -1,60 +1,130 @@
-# Interactive Academic Notebook
+# 📓 Interactive Academic Notebook
 
-A beautiful, interactive digital notebook built with React and page-flip animations to showcase an academic journey. Designed to be embedded as a premium artifact in portfolios.
+I built this interactive academic notebook to present my educational journey in a more personal and engaging way. Instead of displaying my qualifications in a conventional timeline, I wanted to recreate the familiar experience of flipping through a physical notebook.
 
-## 🛠 Tech Stack
+Built with React, TypeScript, and Vite, the project combines page-turning animations with custom-designed academic pages. I also customized the original flipbook implementation to address interaction issues and make the experience work better with a scaled, responsive layout.
 
-- **Framework**: React 18 + Vite
-- **Language**: TypeScript
-- **Library**: `react-pageflip` (for realistic book turning effects)
-- **Styling**: CSS Modules / Global CSS
-- **Deployment**: Netlify
+## ✨ What I Built
 
-## 🚀 Deployment Info
+- **Interactive page flipping:** Explore my academic journey through realistic page-turning interactions.
+- **Academic journey:** Discover my school, undergraduate, and postgraduate milestones.
+- **Custom notebook design:** A personalized layout inspired by the notebooks I used during my school days.
+- **Responsive layout:** The notebook adjusts its dimensions for mobile and desktop screens.
+- **Navigation controls:** Flip pages using navigation buttons, keyboard arrows, or the page corners.
+- **Portfolio integration:** Designed to be embedded in my main portfolio website using an iframe.
 
-This project is configured for **Netlify** deployment.
+## 💡 Why I Built This
 
-- **Deployment Root**: `/academic-book` (The web application lives in this folder)
-- **Build Command**: `npm run build`
-- **Publish Directory**: `dist`
-- **Node Version**: 18+ recommended
+While building my portfolio website, I explored different ways to present my academic journey. I wanted something more personal and memorable than a traditional timeline or a list of qualifications.
 
-### Embedding (Iframe) support
+I discovered a flip-notebook project on GitHub that inspired me to explore this idea. I used it as a starting point, then customized the design and functionality to create my own digital academic notebook — bringing back the familiar feeling of flipping through a notebook from my school days.
 
-This application is explicitly configured to allow embedding in iframes (e.g., inside a personal portfolio).
-- `netty.toml` ensures `X-Frame-Options` and `Content-Security-Policy` headers allow this.
-- `_redirects` handles SPA routing to prevent 404s inside iframes.
+The result is an interactive way to explore my academic journey, combining nostalgia with a modern web experience.
 
-## 💻 Local Development
+## 🛠️ How I Built It
 
-1. Open the terminal and navigate to the project root.
-2. Enter the academic-book directory:
-   ```bash
-   cd academic-book
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
+I built the project with React and TypeScript, using Vite for development and production builds.
 
-## 🏗 Build for Production
+The flipbook functionality uses the `page-flip` library. Beyond customizing the notebook's appearance and content, I implemented fixes for issues I encountered while integrating page-flip interactions with a scaled layout.
 
-To create a production build locally:
+One of my main customizations is `patchPageFlipCoordinates()`, which adjusts pointer coordinates to account for scaling. I also modified cover-page interactions to prevent unwanted page curling and shifting.
+
+The application includes responsive sizing, keyboard navigation, clickable index navigation, page indicators, and iframe height notifications to support integration with my portfolio.
+
+### Tech Stack
+
+- **React 18** — UI and component architecture
+- **TypeScript** — Type-safe development
+- **Vite** — Development server and production builds
+- **page-flip** — Page-turning interactions
+- **CSS** — Notebook styling, layout, and animations
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js and npm installed
+- Git installed
+
+### Installation
+
+Clone the repository:
 
 ```bash
-cd demo
+git clone https://github.com/PratikPawar020403/notebook.git
+cd notebook/academic-book
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Vite will display a local URL where you can explore the notebook.
+
+### Production Build
+
+To create a production build:
+
+```bash
 npm run build
 ```
 
-The output will be in `demo/dist`.
+The generated files will be available in the `dist` directory inside `academic-book`.
 
-## 📂 Project Structure
+To preview the production build locally:
 
-- `demo/` - **Main Application Source** (Deploy this folder)
-  - `src/` - React source code
-  - `public/` - Static assets and redirects
-  - `netlify.toml` - Netlify security configuration
+```bash
+npm run preview
+```
+
+## 📁 Project Structure
+
+```text
+notebook/
+├── academic-book/
+│   ├── public/             # Public assets
+│   ├── src/
+│   │   ├── lib/            # Flipbook implementation and custom fixes
+│   │   └── ...             # Pages, components, and academic content
+│   ├── package.json
+│   ├── vite.config.ts
+│   └── ...
+├── README.md
+└── ...
+```
+
+## 🖼️ Portfolio Integration
+
+I designed the notebook to work as an embedded experience within my main portfolio website.
+
+The application communicates its height to the parent window using `postMessage`, allowing the parent page to respond to notebook size changes when its iframe integration handles those messages.
+
+The Netlify configuration includes iframe-related response headers:
+
+```toml
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "ALLOWALL"
+    Content-Security-Policy = "frame-ancestors *"
+```
+
+These settings are intended to permit embedding. For a production deployment, I recommend restricting `frame-ancestors` to the specific portfolio domain and verifying the hosting platform's header behavior.
+
+## 🙌 Acknowledgements
+
+This project was inspired by a flip-notebook implementation I discovered on GitHub. I used it as a starting point and built upon it with my own design changes, academic content, and custom interaction fixes.
+
+The project reflects my interest in creating web experiences that are not only functional, but also personal and memorable.
+
+---
+
+**Built with curiosity, code, and a little nostalgia.** 📖
